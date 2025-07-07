@@ -1,0 +1,19 @@
+module "clustering" {
+  source      = "../module/eks"
+  vpccidr  = var.vpccidr
+  vpcname     = var.vpcname
+  pubsub1   = var.pubsub1
+  pubsubaz1 = var.pubsub2
+  pubsubname1 = var.pubsubname1
+  pubsub2  = var.pubsub2
+  pubsubaz12 = var.pubsubaz2
+  pubsubname2 = var.pubsubname2
+  igwname = var.igwname
+  igwcidr = var.igwcidr
+  block1      = var.block1
+  block2      = var.block2
+  block3      = var.block3
+  env         = var.env
+  clustername = var.clustername
+  sgname = var.sgname
+}

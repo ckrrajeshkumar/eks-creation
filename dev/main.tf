@@ -1,12 +1,12 @@
 module "clustering" {
-  source      = "../module/eks"
+  source      = "../modules/eks"
   vpccidr  = var.vpccidr
   vpcname     = var.vpcname
   pubsub1   = var.pubsub1
-  pubsubaz1 = var.pubsub2
+  pubsubaz1 = var.pubsubaz1
   pubsubname1 = var.pubsubname1
   pubsub2  = var.pubsub2
-  pubsubaz12 = var.pubsubaz2
+  pubsubaz2 = var.pubsubaz2
   pubsubname2 = var.pubsubname2
   igwname = var.igwname
   igwcidr = var.igwcidr

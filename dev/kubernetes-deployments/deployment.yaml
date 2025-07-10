@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: babajirepl-dep2
+  namespace: babajirep-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      apptype: webapp
+      env: dev
+  template:
+    metadata:
+      name: wepappcon-rep
+      labels:
+        apptype: webapp
+        env: dev
+    spec:
+      containers:
+      - name: webappcon
+        image: sudarshanlnx/farmfresh:v1
+        imagePullPolicy: Always
+        ports:
+        - name: apache
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "250m"
+          limits:
+            memory: "250Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: replica-svc2
+  namespace: babajirep-ns
+spec:
+  type: NodePort
+  ports:
+  - name: webapp
+    nodePort: 30003
+    port: 80
+    targetPort: 80
+    protocol : TCP
+  selector:
+    apptype: webapp
+    env: dev
+
+
+

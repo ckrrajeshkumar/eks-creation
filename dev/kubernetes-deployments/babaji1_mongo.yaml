@@ -18,9 +18,9 @@ spec:
         env: dev
     spec:
       volumes:
-      - name: datablk
+      - name: babajidatavol
         persistentVolumeClaim:
-          claimName: babajivol
+          claimName: babajivolclaim
       containers:
       - name: babajidatacon
         image: sudarshanlnx/mongo:latest
@@ -30,15 +30,8 @@ spec:
           containerPort: 27017
           protocol: TCP
         volumeMounts:
-          - mountPath: /data/db
-            name: datablk
-#        resources:
-#          requests:
-#            memory: "100Mi"
-#            cpu: "200m"
-#          limits:
-#            memory: "200Mi"
-#            cpu: "400m"
+        - mountPath: /data/db
+          name: babajidatavol
 ---
 apiVersion: v1
 kind: Service
@@ -54,5 +47,3 @@ spec:
   selector:
     apptype: dataapp
     env: dev
-
-

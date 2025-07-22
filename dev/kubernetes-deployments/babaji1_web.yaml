@@ -24,18 +24,22 @@ spec:
         - name: apache
           containerPort: 8080
           protocol: TCP
-#        resources:
-#          requests:
-#            memory: "200Mi"
-#            cpu: "200m"
-#          limits:
-#            memory: "400Mi"
-#            cpu: "400"
+        env:
+        - name: username
+          valueFrom:
+            secretKeyRef:
+              name: babaji-secret
+              key: username
+        - name: password
+          valueFrom:
+            secretKeyRef:
+              name: babaji-secret
+              key: password
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: babajisvc
+  name: babajiwebsvc
   namespace: babajins
 spec:
   ports:
@@ -52,8 +56,6 @@ kind: Ingress
 metadata:
   name: webingress
   namespace: babajins
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
@@ -64,6 +66,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: babajisvc
+            name: babajiwebsvc
             port:
               number: 80
